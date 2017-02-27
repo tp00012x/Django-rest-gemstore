@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="myStore">
+<head>
+	<title>Gem Store App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.js"></script>
+	<script type="text/javascript" src="modules/reviews.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="controllers/myStoreController.js"></script>
+	<script type="text/javascript" src="controllers/myPanelController.js"></script>
+	<script type="text/javascript" src="controllers/myReviewsController.js"></script>
+</head>
+<body>
+<div class="container">
+<div ng-controller="myStoreController" class="row">
+	<div ng-repeat="product in gems" class="col-md-4">
+		<div class="panel-heading">
+			<h1>{{product.name }}</h1>
+		</div>
+		<div class="panel-body">
+			<div>
+				<img ng-src='{{product.images}}'/>
+			</div>
+				<h2 >{{product.price | currency}}</h2>
+				<button ng-show="product.canPurchase" class="btn btn-success">Add to Cart</button>
+		</div>
+			<section ng-init="tab = 1" ng-controller="myPanelController">
+				<ul class="nav nav-pills">
+					<li ng-class="{ active:isSelected(1) }"><a ng-click="selectTab(1)">Description</a></li>
+					<li ng-class="{ active:isSelected(2) }"><a ng-click="selectTab(2)">Specifications</a></li>
+					<li ng-class="{ active: isSelected(3) }"><a ng-click="selectTab(3)">Reviews</a></li>
+				</ul>
+
+
+				<div class="panel" ng-show = "isSelected(1)">
+					<h4>Description</h4>
+					<blockquote>{{product.description}}</blockquote>
+				</div>
+				<div class="panel" ng-show = "isSelected(2)">
+					<h4>Specifications</h4>
+					<blockquote>Nothing yet</blockquote>
+				</div>
+				<div ng-app="storeReviews">
+					<div class="panel" ng-show="isSelected(3)" reviews ng-controller="myReviewsController">
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
