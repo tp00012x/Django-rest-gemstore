@@ -3,7 +3,7 @@ from django.db import models
 
 
 # Create your models here.
-class Customer_Reviews (models.Model):
-    email = models.EmailField(max_length=254) #Stores the email
+class reviews(models.Model):
     stars = models.IntegerField() # Stores the star rating
-    comments = models.TextField() #Stores the user comments
+    body = models.TextField()
+    author = models.TextField()
